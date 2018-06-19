@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
     });
     socket.on('disconnect', function() {
         numberOfOnlineUsers--;
-        io.emit('users', { type: 'users', username: '-', num: numberOfOnlineUsers, status: 'left'});
+        io.emit('users', { type: 'users', usernames: '-', num: numberOfOnlineUsers, status: 'left'});
         console.log(`- left\nthere are ${numberOfOnlineUsers} participants`);
     });
 

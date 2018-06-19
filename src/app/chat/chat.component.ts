@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   public connectionMessage;
   public connectionUsers;
   public connectionOnline;
-  public onlines = [];
+  public userOnline = [];
   public newMsg = '';
   /* public newText = ''; */
   public check: Boolean = false;
@@ -36,7 +36,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   public onUserName(name: string) {
-    //console.log(name);
     sessionStorage.setItem('add-user', name);
     this.chatService.saveUsername(name);
     this.check = true;
@@ -45,7 +44,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.connectionOnline = this.chatService.getUsers().subscribe(data => {
-      this.onlines.push(data);
+      this.userOnline.push(data);
     });
     this.connectionMessage = this.chatService.getMessages().subscribe(message => {
       this.messages.push(message);
