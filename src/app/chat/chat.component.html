@@ -1,0 +1,22 @@
+<ul class="pages">
+  <li class="login page" [hidden]="check">
+    <div class="form">
+      <h3 class="title">What's your nickname?</h3>
+      <input class="usernameInput" type="text" #username (keyup.enter)="onUserName(username.value)" maxlength="14" autofocus="" />
+    </div>
+  </li>
+
+  <li class="chat page" [hidden]="!check">
+    <div class="chatArea">
+      <ul class="messages">
+        <li class="log" *ngFor="let online of onlines">
+          <span>{{online.usernames}}</span> {{online.status}} <br> there are {{online.num}} participants
+        </li>
+        <li class="message" *ngFor="let message of messages">
+          <strong style="padding-right: 10px;">{{ message.username }}</strong>  {{ message.text }}
+        </li>
+      </ul>
+    </div>
+    <input class="inputMessage" placeholder="Type here..." [(ngModel)]="newMsg" type="text" #message (keyup.enter)="sendMessage(message.value)" autofocus="" />
+  </li>
+</ul>
