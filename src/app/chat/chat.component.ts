@@ -12,9 +12,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   public messages: IMessage[] = [];
   public username = '';
-  public connectionMessage;
-  public connectionUsers;
-  public connectionOnline;
+  public connectionMessage: any;
+  public connectionOnline: any;
   public userOnline: IUserOnline[] = [];
   public newMsg = '';
   public check: Boolean = false;
