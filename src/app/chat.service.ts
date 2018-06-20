@@ -13,11 +13,23 @@ export class ChatService {
     this.socket = io('http://localhost:3000');
   }
 
+  /**
+   *
+   *
+   * @param {string} msg
+   * @param {string} username
+   * @memberof ChatService
+   */
   public sendMessage(msg: string, username: string) {
     this.socket.emit('message', msg, username);
-    this.socket.emit('users');
   }
 
+  /**
+   *
+   *
+   * @returns
+   * @memberof ChatService
+   */
   public getMessages() {
     this.observable = new Observable(observer => {
         this.socket.on('message', (data) => {
@@ -30,22 +42,25 @@ export class ChatService {
     return this.observable;
   }
 
+  /**
+   *
+   *
+   * @param {string} name
+   * @memberof ChatService
+   */
   public saveUsername(name: string) {
     this.socket.emit('users', name);
   }
 
+  /**
+   *
+   *
+   * @returns
+   * @memberof ChatService
+   */
   public getUsers() {
     this.observable = new Observable(observer => {
       this.socket.on('users', (data) => {
-        /* for (let i = 0; i < data.users.length; i++) {
-          this.user = {
-            username: String
-          }
-          this.user.username = data.users[i];
-          this.myArray.push(this.user);
-        }
-
-        observer.next(this.myArray); */
         observer.next(data);
       });
       return () => {

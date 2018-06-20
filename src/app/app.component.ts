@@ -7,17 +7,5 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  /* socket;
-
-  constructor() {
-    this.socket = io();
-  } */
-
-  /* ngOnInit() {
-    this.user = sessionStorage.getItem('add-user');
-    if (this.user) {
-      this.login = true;
-    }
-  } */
 
 }

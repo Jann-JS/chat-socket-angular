@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server);
 
-let numberOfOnlineUsers = 0;
+let numberOnline = 0;
 let status;
 
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -18,18 +18,16 @@ app.get('*', (req, res) => {
 
 io.on('connection', (socket) => {
     
-    numberOfOnlineUsers++;
+    numberOnline++;
     socket.on('users', (username) => {
-        console.log(`${username} joined there are ${numberOfOnlineUsers} participants`);
-        io.emit('users', { type: 'users', usernames: username, num: numberOfOnlineUsers, status: 'joined' });
+        io.emit('users', { type: 'users', usernames: username, num: numberOnline, status: 'joined' });
     });
     socket.on('message', (message, username) => {
         io.emit('message', { type: 'message', text: message, username: username });
     });
     socket.on('disconnect', function() {
-        numberOfOnlineUsers--;
-        io.emit('users', { type: 'users', username: '-', num: numberOfOnlineUsers, status: 'left'});
-        console.log(`- left\nthere are ${numberOfOnlineUsers} participants`);
+        numberOnline--;
+        io.emit('users', { type: 'users', username: '-', num: numberOnline, status: 'left'});
     });
 
 });
