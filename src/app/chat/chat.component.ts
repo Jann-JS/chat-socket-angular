@@ -10,17 +10,31 @@ import { NavigationExtras } from '@angular/router';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
+<<<<<<< HEAD
   public messages = [];
   public username = '';
   public connectionMessage;
   public connectionUsers;
   public connectionOnline;
   public userOnline = [];
+=======
+  public messages: IMessage[] = [];
+  public username = '';
+  public connectionMessage: any;
+  public connectionOnline: any;
+  public userOnline: IUserOnline[] = [];
+>>>>>>> master
   public newMsg = '';
   public check: Boolean = false;
 
   constructor(private chatService: ChatService) { }
 
+  /**
+   *
+   *
+   * @param {string} value
+   * @memberof ChatComponent
+   */
   public sendMessage(value: string) {
     this.newMsg = value;
     this.username = sessionStorage.getItem('add-user');
@@ -31,6 +45,12 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   *
+   *
+   * @param {string} name
+   * @memberof ChatComponent
+   */
   public onUserName(name: string) {
     sessionStorage.setItem('add-user', name);
     this.chatService.saveUsername(name);
@@ -52,4 +72,17 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.connectionOnline.unsubscribe();
   }
 
+}
+
+interface IMessage {
+  type: string;
+  text: string;
+  username: string;
+}
+
+interface IUserOnline {
+  type: string;
+  usernames: string;
+  num: number;
+  status: string;
 }
