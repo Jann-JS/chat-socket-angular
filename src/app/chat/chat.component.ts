@@ -10,21 +10,22 @@ import { NavigationExtras } from '@angular/router';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
-  private socket;
-  public messages = [];
+  public messages: IMessage[] = [];
   public username = '';
-  public connectionMessage;
-  public connectionUsers;
-  public connectionOnline;
-  public onlines = [];
+  public connectionMessage: any;
+  public connectionOnline: any;
+  public userOnline: IUserOnline[] = [];
   public newMsg = '';
-  /* public newText = ''; */
   public check: Boolean = false;
 
-  constructor(private chatService: ChatService) {
-    this.socket = this.chatService;
-  }
+  constructor(private chatService: ChatService) { }
 
+  /**
+   *
+   *
+   * @param {string} value
+   * @memberof ChatComponent
+   */
   public sendMessage(value: string) {
     this.newMsg = value;
     this.username = sessionStorage.getItem('add-user');
@@ -35,8 +36,13 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   *
+   *
+   * @param {string} name
+   * @memberof ChatComponent
+   */
   public onUserName(name: string) {
-    //console.log(name);
     sessionStorage.setItem('add-user', name);
     this.chatService.saveUsername(name);
     this.check = true;
@@ -45,7 +51,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.connectionOnline = this.chatService.getUsers().subscribe(data => {
-      this.onlines.push(data);
+      this.userOnline.push(data);
     });
     this.connectionMessage = this.chatService.getMessages().subscribe(message => {
       this.messages.push(message);
@@ -54,8 +60,20 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.connectionMessage.unsubscribe();
-    /* this.connectionUsers.unsubscribe(); */
     this.connectionOnline.unsubscribe();
   }
 
+}
+
+interface IMessage {
+  type: string;
+  text: string;
+  username: string;
+}
+
+interface IUserOnline {
+  type: string;
+  usernames: string;
+  num: number;
+  status: string;
 }
