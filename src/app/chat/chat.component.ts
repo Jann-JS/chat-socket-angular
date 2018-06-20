@@ -10,11 +10,20 @@ import { NavigationExtras } from '@angular/router';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
+<<<<<<< HEAD
+  public messages = [];
+  public username = '';
+  public connectionMessage;
+  public connectionUsers;
+  public connectionOnline;
+  public userOnline = [];
+=======
   public messages: IMessage[] = [];
   public username = '';
   public connectionMessage: any;
   public connectionOnline: any;
   public userOnline: IUserOnline[] = [];
+>>>>>>> master
   public newMsg = '';
   public check: Boolean = false;
 
