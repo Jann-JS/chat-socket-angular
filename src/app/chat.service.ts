@@ -6,8 +6,8 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class ChatService {
 
-  private socket;
-  private observable;
+  private socket: any;
+  private observable: any;
 
   constructor() {
     this.socket = io('http://localhost:3000');
