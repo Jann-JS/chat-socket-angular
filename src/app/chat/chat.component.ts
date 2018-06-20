@@ -10,11 +10,12 @@ import { NavigationExtras } from '@angular/router';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
-  public messages = [];
+  public messages: IMessage[] = [];
   public username = '';
-  public connectionMessage: any;
-  public connectionOnline: any;
-  public userOnline = [];
+  public connectionMessage;
+  public connectionUsers;
+  public connectionOnline;
+  public userOnline: IUserOnline[] = [];
   public newMsg = '';
   public check: Boolean = false;
 
@@ -63,4 +64,17 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.connectionOnline.unsubscribe();
   }
 
+}
+
+interface IMessage {
+  type: string;
+  text: string;
+  username: string;
+}
+
+interface IUserOnline {
+  type: string;
+  usernames: string;
+  num: number;
+  status: string;
 }
