@@ -15,7 +15,6 @@ export class ChatService {
 
   public sendMessage(msg: string, username: string) {
     this.socket.emit('message', msg, username);
-    this.socket.emit('users');
   }
 
   public getMessages() {
@@ -37,15 +36,6 @@ export class ChatService {
   public getUsers() {
     this.observable = new Observable(observer => {
       this.socket.on('users', (data) => {
-        /* for (let i = 0; i < data.users.length; i++) {
-          this.user = {
-            username: String
-          }
-          this.user.username = data.users[i];
-          this.myArray.push(this.user);
-        }
-
-        observer.next(this.myArray); */
         observer.next(data);
       });
       return () => {

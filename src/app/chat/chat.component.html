@@ -9,7 +9,7 @@
   <li class="chat page" [hidden]="!check">
     <div class="chatArea">
       <ul class="messages">
-        <li class="log" *ngFor="let online of onlines">
+        <li class="log" *ngFor="let online of userOnline">
           <span>{{online.usernames}}</span> {{online.status}} <br> there are {{online.num}} participants
         </li>
         <li class="message" *ngFor="let message of messages">
